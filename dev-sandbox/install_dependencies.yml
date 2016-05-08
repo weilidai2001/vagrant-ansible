@@ -1,6 +1,8 @@
 ---
 - hosts: all
-  become: sudo
+  become: yes
+  become_method: sudo
   roles:
     - java_8
     - redis
+    - postgres
