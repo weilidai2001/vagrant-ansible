@@ -7,9 +7,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.ssh.insert_key = false
     config.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
 
-    # Configure VM settings for servers running in VirtualBox.
-    config.vm.provider :virtualbox do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "2048"]
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 4096
+        v.cpus = 2
     end
 
     # Application server 1.

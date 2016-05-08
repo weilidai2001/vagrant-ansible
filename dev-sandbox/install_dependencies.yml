@@ -6,3 +6,4 @@
     - java_8
     - redis
     - postgres
+    - elasticsearch
