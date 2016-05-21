@@ -8,16 +8,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
 
     config.vm.provider "virtualbox" do |v|
-        v.memory = 4096
-        v.cpus = 2
+        v.memory = 2048
+        v.cpus = 1
     end
 
-    # Application server 1.
-    config.vm.define "app1" do |app|
-        app.vm.hostname = "app1.dev"
-        app.vm.box = "ubuntu/trusty64"
+    # Postgres 1
+    config.vm.define "db1" do |box|
+        box.vm.hostname = "db1.dev"
+        box.vm.box = "ubuntu/trusty64"
 
-        app.vm.network :private_network, ip: "192.168.60.2"
+        box.vm.network :private_network, ip: "192.168.60.2"
+        config.ssh.forward_agent = true # allow external SSH
+    end
+
+    # Postgres 2
+    config.vm.define "db2" do |box|
+        box.vm.hostname = "db2.dev"
+        box.vm.box = "ubuntu/trusty64"
+
+        box.vm.network :private_network, ip: "192.168.60.3"
         config.ssh.forward_agent = true # allow external SSH
     end
 end
